@@ -1,5 +1,7 @@
 Steps to add kubelet kubeadm kubectl
 
+sudo apt-get update && sudo apt-get install -y apt-transport-https curl
+
 echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.28/deb/ /" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 
 curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
@@ -8,12 +10,18 @@ sudo apt update
 
 sudo apt install -y kubelet kubeadm kubectl
 
+sudo apt-get install docker.io
+sudo systemctl start docker
+sudo systemctl status docker
+sudo systemctl enable docker
+
 sudo swapoff -a
 
 sudo vi /etc/fstab  --- disable the swapoff option
 
 sudo kubeadm init  (for t2 micor aws AMI -- use --> kubeadm init --ignore-preflight-errors=all)
 
+ kubectl get nodes
 
 kubeadm join 192.168.1.8:6443 --token vfd2gw.8u3q07ax8jgevxo1 \
 	--discovery-token-ca-cert-hash sha256:c532839a209d1e1fe35bcbc3133e860cdb9e64af6a8dc73366078878fe6c8602
