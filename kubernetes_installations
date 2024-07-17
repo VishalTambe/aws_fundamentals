@@ -8,6 +8,10 @@ sudo apt update
 
 sudo apt install -y kubelet kubeadm kubectl
 
+sudo swapoff -a
+
+kubectl config view
+
 
 kubeadm join 192.168.1.8:6443 --token vfd2gw.8u3q07ax8jgevxo1 \
 	--discovery-token-ca-cert-hash sha256:c532839a209d1e1fe35bcbc3133e860cdb9e64af6a8dc73366078878fe6c8602
